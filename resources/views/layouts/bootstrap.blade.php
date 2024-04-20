@@ -112,7 +112,7 @@
                 <a class="nav-link fw-bold py-1 px-0" id="menu-nuestros-servicios" href="/nuestros-servicios">Nuestros Servicios</a>
                 <a class="nav-link fw-bold py-1 px-0" id="menu-contactanos" href="/contactanos">Contáctanos</a>
                 <a class="nav-link fw-bold py-1 px-0" id="menu-nosotros" href="/nosotros">Nosotros</a>
-                <a class="nav-link fw-bold py-1 px-0" id="menu-switch-estilo" href="#">Modo Día</a>
+                <button class="nav-link fw-bold py-1 px-0" id="menu-switch-estilo" onclick="cambiarEstilo()"></button>
             </nav>
         </div>
     </header>
@@ -128,25 +128,44 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>
-    //https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
-    var estiloGlobal = "noche"; // Inicializar como 'noche' o 'dia' según el estilo predeterminado.
-    var body = document.body; // Obtenemos el elemento body para cambiar las clases.
-    var cambio = document.getElementById("menu-switch-estilo");
-    cambio.addEventListener("click", () => {
-        if (estiloGlobal === "noche") {
-            body.classList.add("dia");
-            body.classList.add('text-bg-light')
-            body.classList.remove("noche");
-            body.classList.remove('text-bg-dark')
-            estiloGlobal = "dia";
-        } else {
-            body.classList.add("noche");
-            body.classList.add('text-bg-dark')
-            body.classList.remove("dia");
-            body.classList.remove('text-bg-light')
-            estiloGlobal = "noche";
-        }
+    // En cuanto termine de cargar la pagina, aplicamos el estilo guardado
+    document.addEventListener("DOMContentLoaded", function (event) {
+        aplicarEstiloInicial();
     });
+    function aplicarEstiloInicial() {
+        // Saco de localstorage el estiloglobal, si no existe, es noche por defecto
+        var estiloGlobal = localStorage.getItem('estiloGlobal') || 'noche';
+        actualizarEstilo(estiloGlobal);
+    }
+
+    function cambiarEstilo() {
+        // Tengo que cambiar el estilo de noche por dia y viceversa, escojo el contrario
+        if (localStorage.getItem('estiloGlobal') === 'noche') {
+            var estiloGlobal = 'dia'
+        } else {
+            var estiloGlobal = 'noche'
+        }
+        // lo guardo en localstorage
+        localStorage.setItem('estiloGlobal', estiloGlobal);
+        // cambio el estilo
+        actualizarEstilo(estiloGlobal);
+    }
+
+    function actualizarEstilo(estiloGlobal) {
+        var body = document.body;
+        var cambio = document.getElementById("menu-switch-estilo");
+        if (estiloGlobal === 'dia') {
+            body.classList.add("dia", 'text-bg-light');
+            body.classList.remove("noche", 'text-bg-dark');
+            // le cambio el texto al boton de dia o noche
+            cambio.innerHTML = 'Modo Noche';
+        } else {
+            body.classList.add("noche", 'text-bg-dark');
+            body.classList.remove("dia", 'text-bg-light');
+            // le cambio el texto al boton de dia o noche
+            cambio.innerHTML = 'Modo Día';
+        }
+    }
 </script>
 @yield("javascript-final")
 </body>
