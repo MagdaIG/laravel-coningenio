@@ -21,7 +21,7 @@
                         <label for="message" class="form-label">Mensaje</label>
                         <textarea class="form-control" id="message" rows="4" placeholder="Escribe tu mensaje aquí"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Enviar</button>
+                    <button type="submit" class="btn btn-primary" onclick="enviarformulario()">Enviar</button>
                 </form>
             </div>
             <div class="col-lg-6 mb-4">
@@ -43,5 +43,30 @@
 @section("javascript-final")
     <script>
         document.getElementById("menu-contactanos").classList.add("active");
+        function enviarformulario() {
+            var name = document.getElementById("name")
+            var email = document.getElementById("email")
+            var message = document.getElementById("message")
+
+            if (name.value.length === 0) {
+                alert("Debes escribir un nombre")
+                return;
+
+            }
+            if (email.value.length === 0) {
+                alert("Debes escribir un email")
+                return;
+
+            }
+            if (message.value.length === 0) {
+                alert("Debes escribir un mensaje")
+                return;
+            }
+            console.log("nombre", name.value)
+            console.log("email", email.value)
+            console.log("message", message.value)
+            alert("Formulario enviado correctamente")
+        }
+
     </script>
 @stop
