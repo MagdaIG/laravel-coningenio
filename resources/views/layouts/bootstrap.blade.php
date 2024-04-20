@@ -12,6 +12,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <STYLE>
         /* Estilos para el modo noche (tema oscuro) */
+        .noche .logo {
+            max-height: 50px;
+            height: 50px;
+            background-image: url("images/logo-grande-letras-blanco.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
         .noche .btn-light,
         .noche .btn-light:hover,
         .noche .btn-light:focus {
@@ -45,6 +52,14 @@
         .noche .nav-masthead .active {
             color: #fff;
             border-bottom-color: #fff;
+        }
+
+        .dia .logo {
+            max-height: 50px;
+            height: 50px;
+            background-image: url("images/logo-grande.png");
+            background-size: contain;
+            background-repeat: no-repeat;
         }
 
         /* Estilos para el modo día (tema claro) */
@@ -91,7 +106,7 @@
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <header class="mb-auto">
         <div>
-            <h3 class="float-md-start mb-0">Coningenio.cl</h3>
+            <div class="logo"></div>
             <nav class="nav nav-masthead justify-content-center float-md-end">
                 <a class="nav-link fw-bold py-1 px-0" id="menu-inicio" aria-current="page" href="/">Inicio</a>
                 <a class="nav-link fw-bold py-1 px-0" id="menu-nuestros-servicios" href="/nuestros-servicios">Nuestros Servicios</a>
